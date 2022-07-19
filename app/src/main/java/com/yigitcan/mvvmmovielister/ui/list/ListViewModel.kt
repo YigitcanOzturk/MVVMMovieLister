@@ -1,13 +1,57 @@
 package com.yigitcan.mvvmmovielister.ui.list
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.GsonBuilder
+import com.yigitcan.mvvmmovielister.model.Movie
+import com.yigitcan.mvvmmovielister.model.MovieResponseModel
+import com.yigitcan.mvvmmovielister.service.MovieAPI
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-class ListViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is list Fragment"
+class ListViewModel : ViewModel(), Callback<MovieResponseModel?> {
+    var movieMutableLiveData: MutableLiveData<ArrayList<Movie>?> = MutableLiveData()
+    private var movieArrayList: ArrayList<Movie>? = null
+    private fun init() {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+        val movieAPI = retrofit.create(MovieAPI::class.java)
+        val call: Call<MovieResponseModel?>? = movieAPI.loadChanges("en-US", API_KEY)
+        call?.enqueue(this)
     }
-    val text: LiveData<String> = _text
+
+    override fun onResponse(call: Call<MovieResponseModel?>?, response: Response<MovieResponseModel?>) {
+       try {
+           movieArrayList = ArrayList()
+           movieArrayList = response.body()?.movie
+           movieMutableLiveData.setValue(movieArrayList)
+       }
+       catch (e: NullPointerException) {
+           e.printStackTrace()
+           println(response.errorBody().toString() + "error")
+       }
+    }
+
+    override fun onFailure(call: Call<MovieResponseModel?>?, t: Throwable) {
+        t.printStackTrace()
+    }
+
+    companion object {
+        const val BASE_URL = "https://api.themoviedb.org/3/"
+        const val API_KEY = "45e72af51ad7bb107f12e61387040e94"
+    }
+
+    init {
+
+        // we call the Rest API in init method
+        init()
+    }
 }

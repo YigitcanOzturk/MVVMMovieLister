@@ -8,10 +8,9 @@ import retrofit2.http.Query
 
 
 interface MovieAPI {
-    @GET("movie/1")
+    @GET("discover/movie")
     fun loadChanges(
         @Query("language") language: String?,
-        @Query("apiKey") apiKey: String?,
-        @Query("page") page: Int = 1
+        @Query("api_key") apiKey: String?
     ): Call<MovieResponseModel?>?
 }
