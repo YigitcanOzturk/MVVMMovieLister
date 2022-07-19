@@ -1,4 +1,4 @@
-package com.yigitcan.mvvmmovielister.ui.dashboard
+package com.yigitcan.mvvmmovielister.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.yigitcan.mvvmmovielister.databinding.FragmentDashboardBinding
+import com.yigitcan.mvvmmovielister.databinding.FragmentListBinding
 
-class DashboardFragment : Fragment() {
+class ListFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,14 +19,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val homeViewModel =
+            ViewModelProvider(this)[ListViewModel::class.java]
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textList
+        homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
