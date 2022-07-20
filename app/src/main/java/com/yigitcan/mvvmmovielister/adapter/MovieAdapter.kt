@@ -3,9 +3,10 @@ package com.yigitcan.mvvmmovielister.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
+import com.yigitcan.mvvmmovielister.databinding.BottomSheetDialogLayoutBinding
 import com.yigitcan.mvvmmovielister.databinding.MovieListBinding
 import com.yigitcan.mvvmmovielister.model.Movie
 
@@ -25,10 +26,22 @@ class MovieAdapter(private val movieList: ArrayList<Movie>, private var mContext
         holder.itemBinding.txtDescription.text = currentItem.overView
         holder.itemBinding.txtDate.text = currentItem.releaseDate
         holder.itemBinding.txtVote.text = currentItem.voteAverage.toString()
+        holder.itemBinding.cardView.setOnClickListener {
+           showDialog(it.rootView.context)
+        }
     }
 
     override fun getItemCount(): Int {
         return movieList.size
+    }
+
+    private fun showDialog(context: Context?) {
+        val dialog = BottomSheetDialog(context!!)
+        val binding: BottomSheetDialogLayoutBinding = BottomSheetDialogLayoutBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(binding.root)
+        binding.add.setOnClickListener {  }
+        binding.cancel.setOnClickListener { dialog.dismiss() }
+        dialog.show()
     }
 
     inner class MovieViewHolder(internal val itemBinding: MovieListBinding) :  RecyclerView.ViewHolder(itemBinding.root)

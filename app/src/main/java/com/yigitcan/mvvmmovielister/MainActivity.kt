@@ -5,14 +5,10 @@ import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.yigitcan.mvvmmovielister.databinding.ActivityMainBinding
 import com.yigitcan.mvvmmovielister.ui.details.DetailsFragment
-import com.yigitcan.mvvmmovielister.ui.favorites.FavoritesFragment
 import com.yigitcan.mvvmmovielister.ui.list.ListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val fragmentList = ListFragment()
-        val fragmentFavorites = FavoritesFragment()
         val fragmentDetails = DetailsFragment()
         replaceCurrentFragment(fragmentList)
 
@@ -41,11 +36,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_list -> {
                     Log.i("NavBar","List pressed")
                     replaceCurrentFragment(fragmentList)
-                    true
-                }
-                R.id.navigation_favorites -> {
-                    Log.i("NavBar","Favorites pressed")
-                    replaceCurrentFragment(fragmentFavorites)
                     true
                 }
                 R.id.navigation_details -> {

@@ -4,4 +4,7 @@
     <string name="title_favorites">Favorites</string>
     <string name="title_details">Movie Details</string>
     <string name="todo">TODO</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add to Details</string>
+    <string name="remove">Remove from Details</string>
 </resources>

@@ -7,11 +7,6 @@
         android:title="@string/title_list" />
 
     <item
-        android:id="@+id/navigation_favorites"
-        android:icon="@drawable/ic_baseline_favorite_24"
-        android:title="@string/title_favorites" />
-
-    <item
         android:id="@+id/navigation_details"
         android:icon="@drawable/ic_baseline_manage_search_24"
         android:title="@string/title_details" />
