@@ -27,7 +27,7 @@ class MovieAdapter(private val movieList: ArrayList<Movie>, private var mContext
         holder.itemBinding.txtDate.text = currentItem.releaseDate
         holder.itemBinding.txtVote.text = currentItem.voteAverage.toString()
         holder.itemBinding.cardView.setOnClickListener {
-           showDialog(it.rootView.context)
+           showDialog(it.rootView.context,currentItem.videoId)
         }
     }
 
@@ -35,11 +35,18 @@ class MovieAdapter(private val movieList: ArrayList<Movie>, private var mContext
         return movieList.size
     }
 
-    private fun showDialog(context: Context?) {
+    private fun showDialog(context: Context?,selectedMovie: Int) {
         val dialog = BottomSheetDialog(context!!)
         val binding: BottomSheetDialogLayoutBinding = BottomSheetDialogLayoutBinding.inflate(LayoutInflater.from(context))
         dialog.setContentView(binding.root)
-        binding.add.setOnClickListener {  }
+        binding.add.setOnClickListener {
+            Movie.selectedMovieId = selectedMovie
+            dialog.dismiss()
+        }
+        binding.remove.setOnClickListener {
+            Movie.selectedMovieId = 0
+            dialog.dismiss()
+        }
         binding.cancel.setOnClickListener { dialog.dismiss() }
         dialog.show()
     }

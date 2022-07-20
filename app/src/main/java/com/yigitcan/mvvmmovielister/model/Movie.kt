@@ -4,8 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 
 class Movie {
+
+    companion object {
+        var selectedMovieId = 0
+    }
+
     @SerializedName("id")
-    var id = 0
+    var videoId = 0
 
     @SerializedName("vote_count")
     var voteCount = 0

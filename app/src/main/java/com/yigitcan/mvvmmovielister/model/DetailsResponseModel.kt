@@ -3,6 +3,7 @@ package com.yigitcan.mvvmmovielister.model
 import com.google.gson.annotations.SerializedName
 
 class DetailsResponseModel {
+
     @SerializedName("id")
     var id = 0
 
@@ -15,11 +16,17 @@ class DetailsResponseModel {
     @SerializedName("vote_average")
     var voteAverage = 0.00
 
+    @SerializedName("status")
+    var status: String? = null
+
     @SerializedName("title")
     var title: String? = null
 
     @SerializedName("overview")
     var overView: String? = null
+
+    @SerializedName("genres")
+    var genre: ArrayList<Genre>? = null
 
     @SerializedName("poster_path")
     var posterPath: String? = null
