@@ -26,21 +26,27 @@ class MainActivity : AppCompatActivity() {
         val fragmentList = ListFragment()
         val fragmentDetails = DetailsFragment()
         replaceCurrentFragment(fragmentList)
+        title = navView.menu.findItem(navView.selectedItemId).title
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
 
-        binding.navView.setOnItemSelectedListener { item ->
+
+
+
+        navView.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.navigation_list -> {
                     Log.i("NavBar","List pressed")
                     replaceCurrentFragment(fragmentList)
+                    title = navView.menu.findItem(item.itemId).title
                     true
                 }
                 R.id.navigation_details -> {
                     Log.i("NavBar","Details pressed")
                     replaceCurrentFragment(fragmentDetails)
+                    title = navView.menu.findItem(item.itemId).title
                     true
                 }
                 else -> {

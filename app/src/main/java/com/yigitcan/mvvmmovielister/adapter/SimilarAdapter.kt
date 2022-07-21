@@ -3,11 +3,11 @@ package com.yigitcan.mvvmmovielister.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.yigitcan.mvvmmovielister.databinding.SimilarListBinding
 import com.yigitcan.mvvmmovielister.model.Movie
+import kotlin.math.roundToInt
 
 
 class SimilarAdapter(private val similarList: ArrayList<Movie>, private var mContext: Context?): RecyclerView.Adapter<SimilarAdapter.SimilarViewHolder>(){
@@ -23,12 +23,16 @@ class SimilarAdapter(private val similarList: ArrayList<Movie>, private var mCon
         Picasso.with(mContext).load(baseurl + currentItem.posterPath).into(holder.itemBinding.imageViewSimilar)
         holder.itemBinding.txtTitleSimilar.text = currentItem.title
         holder.itemBinding.txtDescriptionSimilar.text = currentItem.overView
-        holder.itemBinding.txtDateSimilar.text = currentItem.releaseDate
-        holder.itemBinding.txtVoteSimilar.text = currentItem.voteAverage.toString()
+        holder.itemBinding.txtDateSimilar.text = "Release Date\n"+currentItem.releaseDate
+        holder.itemBinding.txtVoteSimilar.text = "Vote Average\n"+round(currentItem.voteAverage).toString()
     }
 
     override fun getItemCount(): Int {
         return similarList.size
+    }
+
+    private fun round(input: Double): Double {
+        return (input * 100.0).roundToInt() / 100.0        // 0.85
     }
 
     inner class SimilarViewHolder(internal val itemBinding: SimilarListBinding) :  RecyclerView.ViewHolder(itemBinding.root)

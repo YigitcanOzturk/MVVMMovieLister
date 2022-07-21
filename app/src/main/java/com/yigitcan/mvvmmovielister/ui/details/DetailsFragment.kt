@@ -45,6 +45,7 @@ class DetailsFragment : Fragment() {
         detailsViewModel.select2.observe(viewLifecycleOwner) {
             binding.recyclerViewSimilar.visibility = it
             binding.cardViewDetails.visibility = it
+            binding.textSimilarTitle.visibility = it
         }
 
         detailsViewModel.select1.observe(viewLifecycleOwner) {
@@ -64,6 +65,11 @@ class DetailsFragment : Fragment() {
                 Picasso.with(context)
                     .load(baseurl + detailsArrayList[lastIndex].posterPath)
                     .into(binding.imageViewDetails)
+                val separatedString = detailsArrayList.joinToString (separator = "") { "${it.genreName}\n" }
+                binding.txtGenreDetails.text = "Genres\n$separatedString"
+                binding.txtStatusDetails.text = "Status\n"+detailsArrayList[lastIndex].status
+                binding.txtDateDetails.text = "Release Date\n"+detailsArrayList[lastIndex].releaseDate
+                binding.txtVoteDetails.text = "Vote Average\n"+detailsArrayList[lastIndex].voteAverage.toString()
             }
             catch (e: Exception) {
                 e.printStackTrace()
@@ -72,9 +78,14 @@ class DetailsFragment : Fragment() {
 
     private var similarUpdateObserver: Observer<ArrayList<Movie>?> =
         Observer<ArrayList<Movie>?> { similarArrayList ->
-            similarAdapter = SimilarAdapter(similarArrayList,context)
-            binding.recyclerViewSimilar.layoutManager = LinearLayoutManager(context)
-            binding.recyclerViewSimilar.adapter = similarAdapter
+            try {
+                similarAdapter = SimilarAdapter(similarArrayList, context)
+                binding.recyclerViewSimilar.layoutManager = LinearLayoutManager(context)
+                binding.recyclerViewSimilar.adapter = similarAdapter
+            }
+            catch(e: Exception){
+                e.printStackTrace()
+            }
         }
 
     override fun onResume() {

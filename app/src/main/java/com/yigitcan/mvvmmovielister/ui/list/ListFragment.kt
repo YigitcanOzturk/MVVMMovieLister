@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +26,7 @@ class ListFragment : Fragment() {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
+
         listViewModel.movieMutableLiveData.observe(viewLifecycleOwner, movieListUpdateObserver)
 
        /* val textView: TextView = binding.textList
@@ -39,9 +39,14 @@ class ListFragment : Fragment() {
 
     private var movieListUpdateObserver: Observer<ArrayList<Movie>?> =
         Observer<ArrayList<Movie>?> { movieArrayList ->
+            try {
             movieAdapter = MovieAdapter(movieArrayList,context)
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
             binding.recyclerView.adapter = movieAdapter
+            }
+            catch(e: Exception){
+             e.printStackTrace()
+            }
         }
 
     override fun onDestroyView() {

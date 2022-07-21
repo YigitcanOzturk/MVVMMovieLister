@@ -24,8 +24,8 @@ class MovieAdapter(private val movieList: ArrayList<Movie>, private var mContext
         Picasso.with(mContext).load(baseurl + currentItem.posterPath).into(holder.itemBinding.imageView)
         holder.itemBinding.txtTitle.text = currentItem.title
         holder.itemBinding.txtDescription.text = currentItem.overView
-        holder.itemBinding.txtDate.text = currentItem.releaseDate
-        holder.itemBinding.txtVote.text = currentItem.voteAverage.toString()
+        holder.itemBinding.txtDate.text = "Release Date\n"+currentItem.releaseDate
+        holder.itemBinding.txtVote.text = "Vote Average\n"+currentItem.voteAverage.toString()
         holder.itemBinding.cardView.setOnClickListener {
            showDialog(it.rootView.context,currentItem.videoId)
         }
