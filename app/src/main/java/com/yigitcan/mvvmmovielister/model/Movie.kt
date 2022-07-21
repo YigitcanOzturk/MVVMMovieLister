@@ -7,6 +7,8 @@ class Movie {
 
     companion object {
         var selectedMovieId = 0
+        const val BASE_URL = "https://api.themoviedb.org/3/"
+        const val API_KEY = "45e72af51ad7bb107f12e61387040e94"
     }
 
     @SerializedName("id")

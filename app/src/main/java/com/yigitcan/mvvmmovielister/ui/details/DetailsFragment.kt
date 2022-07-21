@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
+import com.yigitcan.mvvmmovielister.adapter.SimilarAdapter
 import com.yigitcan.mvvmmovielister.databinding.FragmentDetailsBinding
 import com.yigitcan.mvvmmovielister.model.Genre
+import com.yigitcan.mvvmmovielister.model.Movie
 
 class DetailsFragment : Fragment() {
 
@@ -17,6 +20,8 @@ class DetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private val baseurl = "https://image.tmdb.org/t/p/w500"
     private lateinit var detailsViewModel: DetailsViewModel
+    private lateinit var similarViewModel: SimilarViewModel
+    private lateinit var similarAdapter: SimilarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,21 +36,14 @@ class DetailsFragment : Fragment() {
 
 
         detailsViewModel = ViewModelProvider(this)[DetailsViewModel::class.java]
-        detailsViewModel.genreMutableLiveData.observe(viewLifecycleOwner, detailsUpdateObserver)
+        detailsViewModel.detailsMutableLiveData.observe(viewLifecycleOwner, detailsUpdateObserver)
 
-      /*  if(Movie.selectedMovieId==0){
-            binding.textResult.visibility = View.VISIBLE
-            binding.recyclerViewDetails.visibility = View.GONE
-            binding.cardViewDetails.visibility = View.GONE
-        }
-        else {
-            binding.textResult.visibility = View.GONE
-            binding.recyclerViewDetails.visibility = View.VISIBLE
-            binding.cardViewDetails.visibility = View.VISIBLE
-        }*/
+        similarViewModel = ViewModelProvider(this)[SimilarViewModel::class.java]
+        similarViewModel.similarMutableLiveData.observe(viewLifecycleOwner, similarUpdateObserver)
+
 
         detailsViewModel.select2.observe(viewLifecycleOwner) {
-            binding.recyclerViewDetails.visibility = it
+            binding.recyclerViewSimilar.visibility = it
             binding.cardViewDetails.visibility = it
         }
 
@@ -59,11 +57,12 @@ class DetailsFragment : Fragment() {
     private var detailsUpdateObserver: Observer<ArrayList<Genre>?> =
         Observer<ArrayList<Genre>?> { detailsArrayList ->
             try {
-                binding.txtTitleDetails.text = detailsArrayList[detailsArrayList.size - 1].title
+                val lastIndex: Int = detailsArrayList.size - 1
+                binding.txtTitleDetails.text = detailsArrayList[lastIndex].title
                 binding.txtDescriptionDetails.text =
-                    detailsArrayList[detailsArrayList.size - 1].overView
+                    detailsArrayList[lastIndex].overView
                 Picasso.with(context)
-                    .load(baseurl + detailsArrayList[detailsArrayList.size - 1].posterPath)
+                    .load(baseurl + detailsArrayList[lastIndex].posterPath)
                     .into(binding.imageViewDetails)
             }
             catch (e: Exception) {
@@ -71,11 +70,19 @@ class DetailsFragment : Fragment() {
             }
         }
 
+    private var similarUpdateObserver: Observer<ArrayList<Movie>?> =
+        Observer<ArrayList<Movie>?> { similarArrayList ->
+            similarAdapter = SimilarAdapter(similarArrayList,context)
+            binding.recyclerViewSimilar.layoutManager = LinearLayoutManager(context)
+            binding.recyclerViewSimilar.adapter = similarAdapter
+        }
+
     override fun onResume() {
         super.onResume()
         detailsViewModel.loadData()
         detailsViewModel.control1()
         detailsViewModel.control2()
+        similarViewModel.loadSimilarData()
     }
 
     override fun onDestroyView() {

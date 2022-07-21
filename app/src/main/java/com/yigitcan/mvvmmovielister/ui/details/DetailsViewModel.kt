@@ -14,26 +14,26 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class DetailsViewModel : ViewModel(), Callback<DetailsResponseModel?> {
-    var genreMutableLiveData: MutableLiveData<ArrayList<Genre>?> = MutableLiveData()
+    var detailsMutableLiveData: MutableLiveData<ArrayList<Genre>?> = MutableLiveData()
     private var genreArrayList: ArrayList<Genre>? = null
     private val _select1= MutableLiveData<Int>()
     private val _select2= MutableLiveData<Int>()
     val select1: LiveData<Int> = _select1
     val select2: LiveData<Int> = _select2
+
     fun loadData() {
         val gson = GsonBuilder()
             .setLenient()
             .create()
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Movie.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         val detailsAPI = retrofit.create(DetailsAPI::class.java)
         val call: Call<DetailsResponseModel?>? =
-            detailsAPI.loadChanges(Movie.selectedMovieId, "en-US", API_KEY)
+            detailsAPI.loadChanges(Movie.selectedMovieId, "en-US", Movie.API_KEY)
         call?.enqueue(this)
     }
-
 
     override fun onResponse(
         call: Call<DetailsResponseModel?>?,
@@ -42,15 +42,16 @@ class DetailsViewModel : ViewModel(), Callback<DetailsResponseModel?> {
         try {
             genreArrayList = ArrayList()
             genreArrayList = response.body()?.genre
-            genreArrayList!![genreArrayList!!.size - 1].posterPath = response.body()?.posterPath
-            genreArrayList!![genreArrayList!!.size - 1].overView = response.body()?.overView
-            genreArrayList!![genreArrayList!!.size - 1].releaseDate = response.body()?.releaseDate
-            genreArrayList!![genreArrayList!!.size - 1].voteAverage = response.body()?.voteAverage
-            genreArrayList!![genreArrayList!!.size - 1].status = response.body()?.status
-            genreArrayList!![genreArrayList!!.size - 1].voteCount = response.body()?.voteCount
-            genreArrayList!![genreArrayList!!.size - 1].title = response.body()?.title
-            genreArrayList!![genreArrayList!!.size - 1].videoID = response.body()?.id
-            genreMutableLiveData.value = genreArrayList
+            val lastIndex: Int = genreArrayList!!.size - 1
+            genreArrayList!![lastIndex].posterPath = response.body()?.posterPath // index[0] is not stable but last index works
+            genreArrayList!![lastIndex].overView = response.body()?.overView
+            genreArrayList!![lastIndex].releaseDate = response.body()?.releaseDate
+            genreArrayList!![lastIndex].voteAverage = response.body()?.voteAverage
+            genreArrayList!![lastIndex].status = response.body()?.status
+            genreArrayList!![lastIndex].voteCount = response.body()?.voteCount
+            genreArrayList!![lastIndex].title = response.body()?.title
+            genreArrayList!![lastIndex].videoID = response.body()?.id
+            detailsMutableLiveData.value = genreArrayList
         } catch (e: Exception) {
             e.printStackTrace()
             println(response.errorBody().toString() + "error")
@@ -59,11 +60,6 @@ class DetailsViewModel : ViewModel(), Callback<DetailsResponseModel?> {
 
     override fun onFailure(call: Call<DetailsResponseModel?>?, t: Throwable) {
         t.printStackTrace()
-    }
-
-    companion object {
-        const val BASE_URL = "https://api.themoviedb.org/3/"
-        const val API_KEY = "45e72af51ad7bb107f12e61387040e94"
     }
 
     init {
