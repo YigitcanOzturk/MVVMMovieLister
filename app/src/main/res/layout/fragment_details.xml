@@ -140,6 +140,19 @@
             android:text="@string/similar"
             android:textSize="20sp"/>
 
+            <EditText
+                android:id="@+id/searchTextSimilar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerViewSimilar"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_baseline_manage_search_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/filterList"
+                android:inputType="textFilter" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSimilar"
         android:layout_width="match_parent"

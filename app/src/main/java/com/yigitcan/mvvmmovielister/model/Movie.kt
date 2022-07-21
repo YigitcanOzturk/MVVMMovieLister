@@ -23,6 +23,9 @@ class Movie {
     @SerializedName("vote_average")
     var voteAverage = 0.00
 
+    @SerializedName("original_title")
+    var originalTitle: String? = null
+
     @SerializedName("title")
     var title: String? = null
 

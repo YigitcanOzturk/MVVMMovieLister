@@ -1,6 +1,8 @@
 package com.yigitcan.mvvmmovielister.ui.list
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +31,20 @@ class ListFragment : Fragment() {
 
         listViewModel.movieMutableLiveData.observe(viewLifecycleOwner, movieListUpdateObserver)
 
-       /* val textView: TextView = binding.textList
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        } */
+        val tt: TextWatcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                try {
+                    movieAdapter.filter.filter(s.toString())
+                }
+                catch (e: UninitializedPropertyAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        binding.searchTextList.addTextChangedListener(tt)
+
 
         return root
     }
@@ -48,6 +60,11 @@ class ListFragment : Fragment() {
              e.printStackTrace()
             }
         }
+
+    override fun onResume() {
+        super.onResume()
+        binding.searchTextList.text.clear()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

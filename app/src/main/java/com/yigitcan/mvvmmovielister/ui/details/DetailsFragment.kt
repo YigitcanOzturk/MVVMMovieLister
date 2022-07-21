@@ -1,6 +1,8 @@
 package com.yigitcan.mvvmmovielister.ui.details
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,14 +48,30 @@ class DetailsFragment : Fragment() {
             binding.recyclerViewSimilar.visibility = it
             binding.cardViewDetails.visibility = it
             binding.textSimilarTitle.visibility = it
+            binding.searchTextSimilar.visibility = it
         }
 
         detailsViewModel.select1.observe(viewLifecycleOwner) {
             binding.textResult.visibility = it
         }
 
+        val tt: TextWatcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+             try {
+                similarAdapter.filter.filter(s.toString())
+             }
+             catch (e: UninitializedPropertyAccessException) {
+                e.printStackTrace()
+             }
+            }
+        }
+        binding.searchTextSimilar.addTextChangedListener(tt)
+
         return root
     }
+
 
     private var detailsUpdateObserver: Observer<ArrayList<Genre>?> =
         Observer<ArrayList<Genre>?> { detailsArrayList ->
@@ -90,6 +108,7 @@ class DetailsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        binding.searchTextSimilar.text.clear()
         detailsViewModel.loadData()
         detailsViewModel.control1()
         detailsViewModel.control2()
