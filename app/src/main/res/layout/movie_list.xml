@@ -5,20 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="@dimen/main_padding">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/main_padding"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/gray"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="@dimen/little_spaces"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +29,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/image_height"
                 android:contentDescription="@string/todo"
                 android:scaleType="center"
                 tools:ignore="ImageContrastCheck" />
@@ -50,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:padding="5dp"
+                android:padding="@dimen/little_spaces"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
 
@@ -60,9 +58,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="9dp"
+        android:layout_margin="@dimen/main_padding"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +66,7 @@
 
         <TextView
             android:id="@+id/txtVote"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/text_width"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:textAlignment="textStart"
@@ -79,7 +75,7 @@
 
         <TextView
             android:id="@+id/txtDate"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/text_width"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textAlignment="textEnd"

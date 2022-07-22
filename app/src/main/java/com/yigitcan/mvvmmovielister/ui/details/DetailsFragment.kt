@@ -15,6 +15,7 @@ import com.yigitcan.mvvmmovielister.adapter.SimilarAdapter
 import com.yigitcan.mvvmmovielister.databinding.FragmentDetailsBinding
 import com.yigitcan.mvvmmovielister.model.Genre
 import com.yigitcan.mvvmmovielister.model.Movie
+import kotlin.math.roundToInt
 
 class DetailsFragment : Fragment() {
 
@@ -72,6 +73,9 @@ class DetailsFragment : Fragment() {
         return root
     }
 
+    private fun round(input: Double): Double {
+        return (input * 100.0).roundToInt() / 100.0        // 0.85
+    }
 
     private var detailsUpdateObserver: Observer<ArrayList<Genre>?> =
         Observer<ArrayList<Genre>?> { detailsArrayList ->
@@ -87,7 +91,7 @@ class DetailsFragment : Fragment() {
                 binding.txtGenreDetails.text = "Genres\n$separatedString"
                 binding.txtStatusDetails.text = "Status\n"+detailsArrayList[lastIndex].status
                 binding.txtDateDetails.text = "Release Date\n"+detailsArrayList[lastIndex].releaseDate
-                binding.txtVoteDetails.text = "Vote Average\n"+detailsArrayList[lastIndex].voteAverage.toString()
+                binding.txtVoteDetails.text = "Vote Average\n"+round(detailsArrayList[lastIndex].voteAverage!!).toString()
             }
             catch (e: Exception) {
                 e.printStackTrace()

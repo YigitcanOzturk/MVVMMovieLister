@@ -16,11 +16,9 @@
         android:id="@+id/cardViewDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_margin="@dimen/main_padding"
         app:cardBackgroundColor="@color/black"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="@dimen/little_spaces"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -52,13 +50,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:padding="5dp"
+                android:padding="@dimen/little_spaces"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="@dimen/main_padding"
                 >
                 <TextView
                     android:id="@+id/txtStatusDetails"
@@ -68,7 +66,7 @@
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="@dimen/little_spaces"
                     >
 
                 </TextView>
@@ -81,7 +79,7 @@
                     android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="@dimen/little_spaces"
                     >
 
                 </TextView>
@@ -89,7 +87,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="@dimen/main_padding"
                 >
                 <TextView
                     android:id="@+id/txtVoteDetails"
@@ -99,7 +97,7 @@
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="@dimen/little_spaces"
                     >
 
                 </TextView>
@@ -112,7 +110,7 @@
                     android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="@dimen/little_spaces"
                     >
 
                 </TextView>
@@ -125,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="@dimen/main_padding"
             app:layout_constraintBaseline_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +136,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:text="@string/similar"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size"/>
 
             <EditText
                 android:id="@+id/searchTextSimilar"
@@ -151,6 +149,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/filterList"
+                android:autofillHints="no"
                 android:inputType="textFilter" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -165,6 +164,6 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/no_selected"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
