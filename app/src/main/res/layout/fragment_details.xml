@@ -41,6 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/big_text_size"
+                android:fontFamily="@font/knewave"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -49,7 +51,9 @@
                 android:id="@+id/txtDescriptionDetails"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/schoolbell"
                 android:gravity="center"
+                android:textSize="@dimen/medium_text_size"
                 android:padding="@dimen/little_spaces"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
@@ -58,16 +62,17 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/main_padding"
                 >
+
                 <TextView
                     android:id="@+id/txtStatusDetails"
-                    android:layout_alignParentStart="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/little_spaces"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/little_spaces"
-                    >
+                    android:fontFamily="sans-serif-light"
+                    android:textStyle="bold">
 
                 </TextView>
 
@@ -77,6 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
+                    android:fontFamily="sans-serif-light"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_marginEnd="@dimen/little_spaces"
@@ -95,6 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textStart"
+                    android:fontFamily="sans-serif-light"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/little_spaces"
@@ -106,6 +113,7 @@
                     android:id="@+id/txtDateDetails"
                     android:layout_alignParentEnd="true"
                     android:layout_width="match_parent"
+                    android:fontFamily="sans-serif-light"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
                     android:textColor="@color/white"
@@ -129,14 +137,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardViewDetails"
             >
-        <TextView
-            android:id="@+id/textSimilarTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="@string/similar"
-            android:textSize="@dimen/text_size"/>
+
+            <TextView
+                android:id="@+id/textSimilarTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="@string/similar"
+                android:textSize="@dimen/medium_text_size"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/searchTextSimilar"
@@ -145,6 +155,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/recyclerViewSimilar"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:gravity="center"
+                android:fontFamily="@font/cagliostro"
                 android:drawableStart="@drawable/ic_baseline_manage_search_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -158,12 +169,14 @@
         android:layout_height="match_parent"
         />
         </LinearLayout>
+
         <TextView
             android:id="@+id/textResult"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/cagliostro"
             android:gravity="center"
             android:text="@string/no_selected"
-            android:textSize="@dimen/text_size"/>
+            android:textSize="@dimen/medium_text_size" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

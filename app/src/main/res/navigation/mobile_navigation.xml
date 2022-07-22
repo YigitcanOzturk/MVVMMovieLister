@@ -3,22 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_list">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_list"
         android:name="com.yigitcan.mvvmmovielister.ui.list.ListFragment"
         android:label="@string/title_list"
         tools:layout="@layout/fragment_list" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.yigitcan.mvvmmovielister.ui.favorites.FavoritesFragment"
-        android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_details"
         android:name="com.yigitcan.mvvmmovielister.ui.details.DetailsFragment"
         android:label="@string/title_details"
         tools:layout="@layout/fragment_details" />

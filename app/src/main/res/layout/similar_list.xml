@@ -38,6 +38,7 @@
                 android:id="@+id/txtTitleSimilar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -46,6 +47,7 @@
             <TextView
                 android:id="@+id/txtDescriptionSimilar"
                 android:layout_width="match_parent"
+                android:fontFamily="sans-serif-light"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:padding="@dimen/little_spaces"
@@ -68,6 +70,7 @@
             android:id="@+id/txtVoteSimilar"
             android:layout_width="@dimen/text_width"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:layout_alignParentStart="true"
             android:textAlignment="textStart"
             android:textColor="@color/black"
@@ -76,6 +79,7 @@
         <TextView
             android:id="@+id/txtDateSimilar"
             android:layout_width="@dimen/text_width"
+            android:fontFamily="sans-serif-light"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textAlignment="textEnd"

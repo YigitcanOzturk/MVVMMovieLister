@@ -1,14 +1,15 @@
 <resources>
     <string name="app_name">Movie Lister</string>
     <string name="title_list">Movie List</string>
-    <string name="title_favorites">Favorites</string>
     <string name="title_details">Movie Details</string>
     <string name="todo">TODO</string>
-    <string name="cancel">Cancel</string>
+
     <string name="add">Add to Details</string>
     <string name="remove">Remove from Details</string>
+    <string name="copy">Copy Title</string>
+    <string name="cancel">Cancel</string>
+
     <string name="no_selected">There is no selected movie in your list</string>
     <string name="similar">Similar Movies</string>
     <string name="filterList">Enter a keyword</string>
-    <string name="copy">Copy Title</string>
 </resources>
