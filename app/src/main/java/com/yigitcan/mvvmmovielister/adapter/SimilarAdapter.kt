@@ -10,6 +10,7 @@ import android.widget.Filterable
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.yigitcan.mvvmmovielister.R
 import com.yigitcan.mvvmmovielister.databinding.SimilarListBinding
 import com.yigitcan.mvvmmovielister.model.Movie
 import java.util.*
@@ -38,7 +39,7 @@ class SimilarAdapter(private val similarList: ArrayList<Movie>, private var mCon
             val clipboardManager = holder.itemView.context.getSystemService(Context.CLIPBOARD_SERVICE)  as ClipboardManager
             val clipData = ClipData.newPlainText("title", currentItem.title)
             clipboardManager.setPrimaryClip(clipData)
-            Toast.makeText(mContext, "Title copied to clipboard", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, it.resources.getString(R.string.titleCopied), Toast.LENGTH_SHORT).show()
         }
     }
 

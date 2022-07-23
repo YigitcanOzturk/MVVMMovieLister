@@ -12,4 +12,8 @@
     <string name="no_selected">There is no selected movie in your list</string>
     <string name="similar">Similar Movies</string>
     <string name="filterList">Enter a keyword</string>
+
+    <string name="titleCopied">Title copied to clipboard</string>
+    <string name="movieSelected">Movie selected</string>
+    <string name="movieUnselected">Movie selection removed and details cleared</string>
 </resources>

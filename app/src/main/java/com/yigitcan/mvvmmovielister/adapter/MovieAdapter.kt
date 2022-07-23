@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
+import com.yigitcan.mvvmmovielister.R
 import com.yigitcan.mvvmmovielister.databinding.BottomSheetDialogLayoutBinding
 import com.yigitcan.mvvmmovielister.databinding.MovieListBinding
 import com.yigitcan.mvvmmovielister.model.Movie
@@ -54,18 +55,19 @@ class MovieAdapter(private val movieList: ArrayList<Movie>, private var mContext
         dialog.setContentView(binding.root)
         binding.add.setOnClickListener {
             Movie.selectedMovieId = selectedMovie
-            Toast.makeText(mContext, "Movie selected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, it.resources.getString(R.string.movieSelected), Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
         binding.copy.setOnClickListener {
             val clipboardManager = it.context.getSystemService(Context.CLIPBOARD_SERVICE)  as ClipboardManager
             val clipData = ClipData.newPlainText("title", selectedTitle)
             clipboardManager.setPrimaryClip(clipData)
-            Toast.makeText(mContext, "Title copied to clipboard", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, it.resources.getString(R.string.titleCopied), Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
         binding.remove.setOnClickListener {
             Movie.selectedMovieId = 0
+            Toast.makeText(mContext, it.resources.getString(R.string.movieUnselected), Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
         binding.cancel.setOnClickListener { dialog.dismiss() }

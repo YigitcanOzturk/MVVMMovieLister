@@ -74,5 +74,11 @@ class FilterTest {
         }
         filterList = resultList
         Assert.assertEquals(constraint,filterList[0].originalTitle)
+        try {
+        Assert.assertNull(filterList[1].originalTitle)
+        }
+        catch (e: IndexOutOfBoundsException){
+            e.printStackTrace()
+        }
     }
 }
