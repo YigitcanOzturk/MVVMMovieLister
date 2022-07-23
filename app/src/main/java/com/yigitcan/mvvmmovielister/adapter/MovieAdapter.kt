@@ -54,6 +54,7 @@ class MovieAdapter(private val movieList: ArrayList<Movie>, private var mContext
         dialog.setContentView(binding.root)
         binding.add.setOnClickListener {
             Movie.selectedMovieId = selectedMovie
+            Toast.makeText(mContext, "Movie selected", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
         binding.copy.setOnClickListener {

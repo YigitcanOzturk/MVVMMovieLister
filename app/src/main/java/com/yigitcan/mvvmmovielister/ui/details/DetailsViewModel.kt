@@ -43,7 +43,7 @@ class DetailsViewModel : ViewModel(), Callback<DetailsResponseModel?> {
             genreArrayList = ArrayList()
             genreArrayList = response.body()?.genre
             val lastIndex: Int = genreArrayList!!.size - 1
-            genreArrayList!![lastIndex].posterPath = response.body()?.posterPath // index[0] is not stable but last index works
+            genreArrayList!![lastIndex].posterPath = response.body()?.posterPath // index[0] is not stable because of genre list but last index works
             genreArrayList!![lastIndex].overView = response.body()?.overView
             genreArrayList!![lastIndex].releaseDate = response.body()?.releaseDate
             genreArrayList!![lastIndex].voteAverage = response.body()?.voteAverage
