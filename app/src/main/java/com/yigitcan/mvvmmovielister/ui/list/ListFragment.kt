@@ -19,6 +19,7 @@ class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
     private lateinit var movieAdapter: MovieAdapter
+    private lateinit var listViewModel: ListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,8 +28,8 @@ class ListFragment : Fragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
 
+        listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
         listViewModel.movieMutableLiveData.observe(viewLifecycleOwner, movieListUpdateObserver)
 
         val tt: TextWatcher = object : TextWatcher {
@@ -44,7 +45,6 @@ class ListFragment : Fragment() {
             }
         }
         binding.searchTextList.addTextChangedListener(tt)
-
 
         return root
     }
@@ -64,6 +64,7 @@ class ListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.searchTextList.text.clear()
+        listViewModel.loadData()
     }
 
     override fun onDestroyView() {

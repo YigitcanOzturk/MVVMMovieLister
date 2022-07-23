@@ -22,17 +22,19 @@ class DetailsViewModel : ViewModel(), Callback<DetailsResponseModel?> {
     val select2: LiveData<Int> = _select2
 
     fun loadData() {
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Movie.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-        val detailsAPI = retrofit.create(DetailsAPI::class.java)
-        val call: Call<DetailsResponseModel?>? =
-            detailsAPI.loadChanges(Movie.selectedMovieId, "en-US", Movie.API_KEY)
-        call?.enqueue(this)
+        if(Movie.selectedMovieId!=0) { // If movie is selected load data
+            val gson = GsonBuilder()
+                .setLenient()
+                .create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(Movie.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            val detailsAPI = retrofit.create(DetailsAPI::class.java)
+            val call: Call<DetailsResponseModel?>? =
+                detailsAPI.loadChanges(Movie.selectedMovieId, "en-US", Movie.API_KEY)
+            call?.enqueue(this)
+        }
     }
 
     override fun onResponse(

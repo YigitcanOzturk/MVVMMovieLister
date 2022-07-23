@@ -2,9 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/belleza</item>
-        <item>@font/bellota_light</item>
         <item>@font/cagliostro</item>
-        <item>@font/knewave</item>
-        <item>@font/schoolbell</item>
     </array>
 </resources>

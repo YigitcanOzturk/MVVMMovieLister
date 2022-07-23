@@ -16,16 +16,19 @@ class SimilarViewModel : ViewModel(), Callback<MovieResponseModel?> {
     var similarMutableLiveData: MutableLiveData<ArrayList<Movie>?> = MutableLiveData()
     private var similarArrayList: ArrayList<Movie>? = null
     fun loadSimilarData() {
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Movie.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-        val similarAPI = retrofit.create(SimilarAPI::class.java)
-        val call: Call<MovieResponseModel?>? = similarAPI.loadChanges(Movie.selectedMovieId,"en-US", Movie.API_KEY)
-        call?.enqueue(this)
+        if(Movie.selectedMovieId!=0) { // If movie is selected load data
+            val gson = GsonBuilder()
+                .setLenient()
+                .create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(Movie.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            val similarAPI = retrofit.create(SimilarAPI::class.java)
+            val call: Call<MovieResponseModel?>? =
+                similarAPI.loadChanges(Movie.selectedMovieId, "en-US", Movie.API_KEY)
+            call?.enqueue(this)
+        }
     }
 
     override fun onResponse(call: Call<MovieResponseModel?>?, response: Response<MovieResponseModel?>) {

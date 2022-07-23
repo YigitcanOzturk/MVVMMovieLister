@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ListViewModel : ViewModel(), Callback<MovieResponseModel?> {
     var movieMutableLiveData: MutableLiveData<ArrayList<Movie>?> = MutableLiveData()
     private var movieArrayList: ArrayList<Movie>? = null
-    private fun init() {
+    fun loadData() {
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -45,8 +45,7 @@ class ListViewModel : ViewModel(), Callback<MovieResponseModel?> {
     }
 
     init {
-
         // we call the Rest API in init method
-        init()
+        loadData()
     }
 }

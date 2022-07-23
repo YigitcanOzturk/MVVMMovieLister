@@ -73,9 +73,9 @@ class FilterTest {
             }
         }
         filterList = resultList
-        Assert.assertEquals(constraint,filterList[0].originalTitle)
+        Assert.assertEquals(constraint,filterList[0].originalTitle) // here i check that whether first object is the filter string itself
         try {
-        Assert.assertNull(filterList[1].originalTitle)
+        Assert.assertNull(filterList[1].originalTitle) // here i check that there is no second object after filtering
         }
         catch (e: IndexOutOfBoundsException){
             e.printStackTrace()

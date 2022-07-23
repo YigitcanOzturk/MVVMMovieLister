@@ -31,19 +31,14 @@ class DetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-
 
         detailsViewModel = ViewModelProvider(this)[DetailsViewModel::class.java]
         detailsViewModel.detailsMutableLiveData.observe(viewLifecycleOwner, detailsUpdateObserver)
 
         similarViewModel = ViewModelProvider(this)[SimilarViewModel::class.java]
         similarViewModel.similarMutableLiveData.observe(viewLifecycleOwner, similarUpdateObserver)
-
 
         detailsViewModel.select2.observe(viewLifecycleOwner) {
             binding.recyclerViewSimilar.visibility = it

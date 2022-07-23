@@ -2,11 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.MVVMMovieLister" parent="Theme.Material3.DynamicColors.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/light_gray</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">?attr/colorControlNormal</item>
     </style>
 </resources>

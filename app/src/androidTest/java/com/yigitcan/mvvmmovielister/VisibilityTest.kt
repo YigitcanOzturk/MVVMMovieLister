@@ -49,7 +49,7 @@ class VisibilityTest {
     }
 
     @Test
-    fun setVisibility(){
+    fun setVisibility(){ // here i check that visibility of view elements are visible or gone after control functions
         textView.visibility = viewIndex1
         imageView.visibility = viewIndex2
         cardView.visibility = viewIndex2
